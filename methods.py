@@ -2,10 +2,8 @@ import time
 import requests
 import socket
 
-
 url = 'https://google.com'
 
-# def results_table()
 
 def find_ip():
     url_to_ip = url[8::]
@@ -31,4 +29,9 @@ def rtt_over_proxy():
     print("The Round Trip Time for {} over proxy is {}".format(url, elapsed_time))
 
 
-# def rtt_
+# def test_rtt():
+#     initial_time = time.time()
+#     request = requests.get(proxy)
+#     ending_time = time.time()
+#     elapsed_time = str(ending_time - initial_time)
+#     print("Test Round Trip Time for {} is {}".format(url, elapsed_time))

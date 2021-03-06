@@ -1,5 +1,7 @@
 import pyshark
+import nmap
 
+proxy_ip = '142.4.203.248'
 
 if __name__ == '__main__':
     capture = pyshark.LiveCapture(interface='Ethernet 3', bpf_filter='tcp port 443')
@@ -21,3 +23,9 @@ if __name__ == '__main__':
         print('Seq:', packet.tcp.seq)
         print('Source:', packet.ip.src)
         print("***********************")
+
+    scanner = nmap.PortScanner()
+    scanner.scan(proxy_ip, '-v', '-sS')
+    print(scanner.scaninfo())
+    print('Ip_Status :', scanner[proxy_ip].state())
+    print('Open Ports: ', scanner[proxy_ip]['tcp'].keys())
