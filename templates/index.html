@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+
+    let xhr = new XMLHttpRequest();
+
+    const startTime = new Date();
+    xhr.open('GET', 'http://localhost:5000/js');
+
+    xhr.send();
+
+    xhr.onload = () => {
+        if (xhr.status != 200) {
+            return;
+        }
+
+        const rtt = new Date() - startTime;
+
+        console.log('Загрузка завершена \n');
+        console.log(`Время затраченное на загрузку ${rtt}`);
+        // console.log('Ответ:');
+        // console.log(xhr.response);
+
+        let xhr2 = new XMLHttpRequest();
+        xhr2.open('GET', 'http://localhost:5000/rtt?rtt=' + rtt);
+        xhr2.send();
+    };
+
+    xhr.onprogress = (event) => {
+        console.log('Шаг загрузки');
+        console.log(`Загружено ${event.loaded} из ${event.total} \n\n`);
+    };
+
+    xhr.onerror = (err) => {
+// обработаем ошибку, не связанную с HTTP (например, нет соединения)
+        console.log('Другая ошибка:')
+        console.log(err)
+    };
+
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState == 2) {
+            console.log('Получены заголоки');
+            console.log(xhr.getAllResponseHeaders())
+            console.log(`Время затраченное к концу получения заголовков ${new Date() - startTime} \n\n`);
+        }
+
+        if (xhr.readyState == 3) {
+            console.log('Начата загрузка тела ответа \n\n');
+        }
+        if (xhr.readyState == 4) {
+            console.log('Обработка ответа завершена \n');
+        }
+    };
+</script>
+</body>
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Title</title>
+</head>
+<body>
+<script>
+const startTime = new Date();
+fetch('https://google.com')
+.then((response) => {
+const endTime = new Date();
+console.log(`RTT: ${endTime - startTime} ms \n\n`);
+console.log('Headers');
+
+for (const pair of response.headers.entries()) {
+console.log(pair[0]+ ': '+ pair[1]);
+}
+console.log('\n');
+
+return response.json();
+})
+.then((json) => {
+
+console.log('Response:');
+console.log(json);
+})
+.catch((err) => {
+console.log('Get error while fetch or parse json:');
+console.log(err);
+});
+</script>
+</body>
+</html>

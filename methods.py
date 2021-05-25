@@ -1,37 +1,75 @@
-import time
-import requests
-import socket
+import flask
+import ping3
 
-url = 'https://google.com'
+from flask import Flask, render_template, request
+from flask_cors import CORS, cross_origin
 
+app = Flask(__name__)
+cors = CORS(app)
 
-def find_ip():
-    url_to_ip = url[8::]
-    print("IP:", socket.gethostbyname(url_to_ip))
+@app.route("/")
+@cross_origin()
+def give_js():
+    ip = request.remote_addr
+    print("Browser", ip)
 
-
-def rtt(): #simple rtt
-    initial_time = time.time()
-    request = requests.get(url)
-    ending_time = time.time()
-    elapsed_time = str(ending_time - initial_time)
-    print("The Round Trip Time for {} is {}".format(url, elapsed_time))
+    return render_template('index.html')
 
 
-def rtt_over_proxy():
-    proxies = {
-        "https": "142.4.203.248:3128"
-    }
-    initial_time = time.time()
-    request = requests.get(url, proxies=proxies)
-    ending_time = time.time()
-    elapsed_time = str(ending_time - initial_time)
-    print("The Round Trip Time for {} over proxy is {}".format(url, elapsed_time))
+@app.route("/js")
+@cross_origin()
+def get_js():
+    ip = request.remote_addr
+    print("JS", ip)
+
+    return render_template('index.html')
 
 
-# def test_rtt():
-#     initial_time = time.time()
-#     request = requests.get(proxy)
-#     ending_time = time.time()
-#     elapsed_time = str(ending_time - initial_time)
-#     print("Test Round Trip Time for {} is {}".format(url, elapsed_time))
+@app.route("/rtt")
+@cross_origin()
+def send_rtt():
+    rtt = request.args.get("rtt")
+    ip = request.remote_addr
+    print("FINALLY", ip)
+    print("Client RTT", rtt)
+
+    r = ping3.ping(ip)
+    print("Server RTT", r * 1000)
+
+    return render_template('index.html')
+
+
+if __name__ == '__main__':
+    app.run('95.182.120.116', port=8181, debug=True)
+    # my_methods.find_ip()
+    # my_methods.rtt()
+    # my_methods.rtt_over_proxy()
+    # my_methods.test_packet()
+
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+"main.py" 48L, 912C                                                                                                                                                                                             1,1           All
