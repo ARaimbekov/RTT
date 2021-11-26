@@ -4,6 +4,7 @@ import ping3
 from flask import Flask, render_template, request
 from flask_cors import CORS, cross_origin
 
+
 app = Flask(__name__)
 cors = CORS(app)
 
@@ -45,31 +46,3 @@ if __name__ == '__main__':
     # my_methods.rtt()
     # my_methods.rtt_over_proxy()
     # my_methods.test_packet()
-
-~
-~
-~
-~
-~
-~
-~
-~
-~
-~
-~
-~
-~
-~
-~
-~
-~
-~
-~
-~
-~
-~
-~
-~
-~
-~
-"main.py" 48L, 912C                                                                                                                                                                                             1,1           All
