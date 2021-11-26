@@ -42,6 +42,9 @@ def send_rtt():
 
 if __name__ == '__main__':
     app.run('95.182.120.116', port=8181, debug=True)
+    give_js()
+    get_js()
+    send_rtt()
     # my_methods.find_ip()
     # my_methods.rtt()
     # my_methods.rtt_over_proxy()
